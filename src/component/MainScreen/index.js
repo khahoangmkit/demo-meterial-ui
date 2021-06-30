@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Grid } from "@material-ui/core";
 import SideBar from "../SideBar";
+import Content from "../Content";
+import TopBar from "../TopBar";
 
 const MainScreen = (props) => {
 
@@ -11,10 +13,10 @@ const MainScreen = (props) => {
     <Grid
       container
       direction={'column'}
-      spacing={1}
       justify={'space-between'}
       height={'100vh'}
     >
+      <TopBar showSideBar={() => setShowSideBar(true)} />
       {
         showSideBar
         &&
@@ -22,9 +24,11 @@ const MainScreen = (props) => {
           container
           xs={1}
         >
-          <SideBar/>
+          <SideBar closeSideBar={setShowSideBar}/>
         </Grid>
       }
+
+      <Content />
 
     </Grid>
   )
