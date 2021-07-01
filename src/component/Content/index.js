@@ -1,14 +1,12 @@
 import React from 'react';
-import { Button, Container, makeStyles } from "@material-ui/core";
-import { Box } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
+  Switch
 } from "react-router-dom";
+import Profile from "../Profile";
+import Notification from "../Notification";
+import Order from "../Order";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -28,16 +26,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Content = (props) => {
-
-  const classes = useStyles();
   return (
-    <Router>
       <Switch>
-        <Router path={'/profile'}>
-
+        <Router exact path={'/profile'}>
+          <Profile />
+        </Router>
+        <Router exact path={'/notification'}>
+          <Notification />
+        </Router>
+        <Router exact path={'/order'}>
+          <Order />
+        </Router>
+        <Router exact path={'/'}>
+          <div>Hello, This is home page</div>
         </Router>
       </Switch>
-    </Router>
   );
 };
 

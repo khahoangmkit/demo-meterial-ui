@@ -1,10 +1,25 @@
 import React from 'react';
+import { Button, withStyles } from "@material-ui/core";
+
+const style = {
+  root: {
+    background: 'red',
+    color: '#fff',
+    padding: '10px',
+    '&:hover': {
+      fontWeight: 'bold',
+      background: 'gray',
+    }
+  },
+
+}
 
 const Profile = (props) => {
+  const { classes } = props;
 
   return (
-    <div>Profile</div>
+    <Button className={classes.root}>Profile</Button>
   );
 };
 
-export default Profile;
+export default withStyles(style)(Profile);

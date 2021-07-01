@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { Box, Divider, Grid, List, ListItem, ListItemText, makeStyles, Typography } from "@material-ui/core";
 import PersonIcon from '@material-ui/icons/Person';
 import ListAltIcon from '@material-ui/icons/ListAlt';
@@ -39,26 +40,29 @@ const useStyles = makeStyles((theme) => ({
 const listMenu = [
   {
     text: 'Thông tin tài khoản',
-    icon: <PersonIcon />,
+    icon: <PersonIcon/>,
     router: '/profile'
   },
   {
     text: 'Đơn mua',
-    icon: <ListAltIcon />,
+    icon: <ListAltIcon/>,
     router: '/order'
   },
   {
     text: 'Thông báo',
-    icon: <NotificationsIcon />,
-    router: '/order'
+    icon: <NotificationsIcon/>,
+    router: '/notification'
   },
 ]
 
 const SideBar = (props) => {
-  const itemsMenu = ['menu1', 'menu2', 'menu3', 'menu4'];
-
   const classes = useStyles();
   const {closeSideBar} = props;
+  let history = useHistory();
+
+  const handleClick = (router) => {
+    history.push(router);
+  }
 
   return (
     <Grid
@@ -79,10 +83,14 @@ const SideBar = (props) => {
               className={classes.item}
               divider
               button
+              onClick={() => {
+                handleClick(item.router);
+                closeSideBar(false);
+              }}
             >
               <Box component={'span'} className={classes.icon}>{item.icon}</Box>
-              <ListItemText primary={item.text} />
-              <Divider light />
+              <ListItemText primary={item.text}/>
+              <Divider light/>
             </ListItem>
           ))
         }
