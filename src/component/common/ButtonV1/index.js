@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from "clsx";
 import { Button, makeStyles } from "@material-ui/core";
 
@@ -27,6 +27,18 @@ const ButtonV1 = (props) => {
   const classes = useStyles();
   const {color, content} = props;
 
+  useEffect(()=> {
+    console.log('component Didmount');
+    return () => {
+      console.log('component WillUnmount');
+    }
+  }, [])
+
+  useEffect(()=> {
+    console.log('component update');
+  }, [content])
+
+
   return (
     <Button
       className={clsx(classes.button, {
@@ -40,3 +52,7 @@ const ButtonV1 = (props) => {
 };
 
 export default ButtonV1;
+// /home/ec2-user/.nvm/versions/node/v14.7.0/bin/node
+// sudo ln -s /home/ec2-user/.nvm/versions/node/v14.17.0/bin/node /usr/bin/node
+// sudo ln -s /home/ec2-user/.nvm/versions/node/v14.17.0/lib/node /usr/lib/node
+// sudo ln -s /home/ec2-user/.nvm/versions/node/v14.17.0/bin/npm /usr/bin/npm
