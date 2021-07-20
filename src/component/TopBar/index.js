@@ -35,7 +35,7 @@ const TopBar = (props) => {
 
   const classes = useStyles();
 
-  const {showSideBar } = props;
+  const { showSideBar } = props;
   return (
     <Grid
       container
