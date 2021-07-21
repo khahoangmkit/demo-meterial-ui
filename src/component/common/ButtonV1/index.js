@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from "clsx";
 import { Button, makeStyles } from "@material-ui/core";
 
@@ -25,29 +25,48 @@ const useStyles = makeStyles({
 
 const ButtonV1 = (props) => {
   const classes = useStyles();
+  const [a, setA] = useState(1);
+  const [b, setB] = useState(1);
+
   const {color, content} = props;
 
-  useEffect(()=> {
-    console.log('component Didmount');
-    return () => {
-      console.log('component WillUnmount');
-    }
-  }, [])
+  // useEffect(() => {
+  //   console.log('component Didmount');
+  //   return () => {
+  //     console.log('component willUnmount');
+  //   }
+  // }, []);
 
-  useEffect(()=> {
-    console.log('component update');
-  }, [content])
+  // useEffect(()=> {
+  //   console.log('component update');
+  // }, [content])
+  let time = null;
 
+  useEffect(() => {
+    time = setTimeout(() => {
+      setB(b + 1);
+    }, 1000);
+  }, [a]);
 
+  const onInCreate = () => {
+    clearTimeout(time);
+    setA(a+1);
+  };
   return (
-    <Button
-      className={clsx(classes.button, {
-        [classes.buttonBlue]: color === 'blue',
-        [classes.buttonRed]: color === 'red',
-      })}
-    >
-      {content}
-    </Button>
+    <>
+      <div>A: {a}</div>
+      <div>B: {b}</div>
+
+      <Button
+        className={clsx(classes.button, {
+          [classes.buttonBlue]: color === 'blue',
+          [classes.buttonRed]: color === 'red',
+        })}
+        onClick={onInCreate}
+      >
+        {content}
+      </Button>
+    </>
   );
 };
 

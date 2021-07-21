@@ -22,7 +22,6 @@ class Counter extends Component {
   }
 
   render() {
-    console.log('Render Component')
     const {num, name, age} = this.props;
     return(
       <>
